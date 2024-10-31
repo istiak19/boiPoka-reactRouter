@@ -9,6 +9,7 @@ import Root from './Components/Root/Root';
 import ErrorPage from './Components/ErrorPage/ErrorPage';
 import Home from './Components/Home/Home';
 import Dash from './Components/DashBorad/Dash';
+import BookDetails from './Components/BookDetails/BookDetails';
 
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path:'/',
         element:<Home></Home>
+      },
+      {
+        path:'book/:bookId',
+        element:<BookDetails></BookDetails>
       },
       {
         path:'/dash',
