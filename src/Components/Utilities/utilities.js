@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 // Function to retrieve the stored read list from localStorage
 const getStoreReadList = () => {
     const storedListStr = localStorage.getItem('read-list');
@@ -12,6 +14,7 @@ const addToStoreReadList = (id) => {
     } else {
         storedList.push(id);
         localStorage.setItem('read-list', JSON.stringify(storedList));
+        toast('This Book added')
     }
 };
 
@@ -29,6 +32,7 @@ const addToStoredWishList = (id) => {
     } else {
         storedWishList.push(id);
         localStorage.setItem('wish-list', JSON.stringify(storedWishList));
+        toast('This Book Added')
     }
 };
 

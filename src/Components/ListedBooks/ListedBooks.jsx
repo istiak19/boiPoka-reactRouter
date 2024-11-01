@@ -9,8 +9,8 @@ import WishList from '../WishList/WishList';
 
 const ListedBooks = () => {
     const books = useLoaderData()
-    const [reads,setReads]=useState([])
-    const [wish,setWish]=useState([])
+    const [reads, setReads] = useState([])
+    const [wish, setWish] = useState([])
     useEffect(() => {
         const storedReadList = getStoreReadList()
         const storedReadListIn = storedReadList.map(id => parseInt(id))
@@ -18,12 +18,12 @@ const ListedBooks = () => {
         setReads(readList)
     }, [])
 
-    useEffect(()=>{
-        const storedWishList=getStoredWishList()
-        const storedWishListIn=storedWishList.map(id=>parseInt(id))
+    useEffect(() => {
+        const storedWishList = getStoredWishList()
+        const storedWishListIn = storedWishList.map(id => parseInt(id))
         const wishList = books.filter(book => storedWishListIn.includes(book.bookId))
         setWish(wishList)
-    },[])
+    }, [])
 
 
     return (
@@ -37,13 +37,13 @@ const ListedBooks = () => {
                 <TabPanel>
                     <h2>Read Books: {reads.length}</h2>
                     {
-                        reads.map(book=><ReadBooks key={book.bookId} book={book}></ReadBooks>)
+                        reads.map(book => <ReadBooks key={book.bookId} book={book}></ReadBooks>)
                     }
                 </TabPanel>
                 <TabPanel>
                     <h2>Wishlist Books: {wish.length}</h2>
                     {
-                        wish.map(book=><WishList key={book.bookId} book={book}></WishList>)
+                        wish.map(book => <WishList key={book.bookId} book={book}></WishList>)
                     }
                 </TabPanel>
             </Tabs>
