@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 const NavBar = () => {
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
-        <li><a>Listed Books</a></li>
+        <li><NavLink to='/listedBook'>Listed Books</NavLink></li>
         <li><a>Pages to Read</a></li>
     </>
     return (
@@ -30,7 +30,7 @@ const NavBar = () => {
                         {links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <a className="btn btn-ghost text-3xl font-bold">Book Vibe</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -38,7 +38,8 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <a className="btn bg-[#23BE0A] font-semibold">Sign In</a>
+                <a className="btn bg-[#59C6D2] font-semibold">Sign Up</a>
             </div>
         </div>
     );
