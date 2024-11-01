@@ -1,29 +1,50 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { getStoreReadList } from '../Utilities/utilities';
+import { getStoredWishList, getStoreReadList } from '../Utilities/utilities';
+import Book from '../Book/Book';
+import ReadBooks from '../ReadBooks/ReadBooks';
+import WishList from '../WishList/WishList';
 
 const ListedBooks = () => {
-    const books=useLoaderData()
+    const books = useLoaderData()
+    const [reads,setReads]=useState([])
+    const [wish,setWish]=useState([])
+    useEffect(() => {
+        const storedReadList = getStoreReadList()
+        const storedReadListIn = storedReadList.map(id => parseInt(id))
+        const readList = books.filter(book => storedReadListIn.includes(book.bookId))
+        setReads(readList)
+    }, [])
+
     useEffect(()=>{
-        const storedReadList=getStoreReadList()
-        const storedReadListIn=storedReadList.map(id=>parseInt(id))
-        console.log(storedReadList,storedReadListIn,books)
+        const storedWishList=getStoredWishList()
+        const storedWishListIn=storedWishList.map(id=>parseInt(id))
+        const wishList = books.filter(book => storedWishListIn.includes(book.bookId))
+        setWish(wishList)
     },[])
+
+
     return (
         <div>
             <Tabs>
                 <TabList>
-                    <Tab>Title 1</Tab>
-                    <Tab>Title 2</Tab>
+                    <Tab>Read Books</Tab>
+                    <Tab>Wishlist Books</Tab>
                 </TabList>
 
                 <TabPanel>
-                    <h2>Any content 1</h2>
+                    <h2>Read Books: {reads.length}</h2>
+                    {
+                        reads.map(book=><ReadBooks key={book.bookId} book={book}></ReadBooks>)
+                    }
                 </TabPanel>
                 <TabPanel>
-                    <h2>Any content 2</h2>
+                    <h2>Wishlist Books: {wish.length}</h2>
+                    {
+                        wish.map(book=><WishList key={book.bookId} book={book}></WishList>)
+                    }
                 </TabPanel>
             </Tabs>
         </div>
