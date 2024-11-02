@@ -1,10 +1,11 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { addToStoredWishList, addToStoreReadList } from "../Utilities/utilities";
 
 const BookDetails = () => {
     const { bookId } = useParams()
     const id = parseInt(bookId)
     const data = useLoaderData()
+    const navigate=useNavigate()
     const book = data.find(d => d.bookId === id)
     const { bookId: currentBookId, image, review, author, yearOfPublishing, publisher, category, rating, totalPages, bookName, tags } = book
     const handleRead=(id)=>{
@@ -13,6 +14,10 @@ const BookDetails = () => {
 
     const handleWishList=(id)=>{
         addToStoredWishList(id)
+    }
+
+    const handleGoBack=()=>{
+        navigate(-1)
     }
     return (
         <div className="hero">
@@ -34,6 +39,7 @@ const BookDetails = () => {
                     <p>Rating: <span className="font-bold">{rating}</span></p>
                     <button onClick={()=>handleRead(bookId)} className="btn btn-outline mr-4 btn-accent">Read</button>
                     <button onClick={()=>handleWishList(bookId)} className="btn bg-[#50B1C9]">Wishlist</button>
+                    <button onClick={handleGoBack} className="btn bg-[#55d535] ml-3">Go Back</button>
                 </div>
             </div>
         </div>
