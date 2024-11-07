@@ -6,6 +6,7 @@ import { getStoredWishList, getStoreReadList } from '../Utilities/utilities';
 import Book from '../Book/Book';
 import ReadBooks from '../ReadBooks/ReadBooks';
 import WishList from '../WishList/WishList';
+import { Helmet } from 'react-helmet-async';
 
 const ListedBooks = () => {
     const books = useLoaderData()
@@ -45,6 +46,9 @@ const ListedBooks = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>ListedBook - Boi poka</title>
+            </Helmet>
             <div className="dropdown">
                 <div tabIndex={0} role="button" className="btn m-1">{sort ? `Sort By: ${sort}` : 'Sort By'}</div>
                 <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
